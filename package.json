@@ -1,0 +1,26 @@
+{
+  "name": "evaa_remove_fake_referrals",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "npx tsc && node build/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iMCrazyDev/evaa_remove_fake_referrals.git"
+  },
+  "author": "Arsen Andrian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iMCrazyDev/evaa_remove_fake_referrals/issues"
+  },
+  "homepage": "https://github.com/iMCrazyDev/evaa_remove_fake_referrals#readme",
+  "description": "",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.43.5",
+    "@ton/ton": "^13.11.2",
+    "@types/pg": "^8.11.6",
+    "pg": "^8.12.0"
+  }
+}
