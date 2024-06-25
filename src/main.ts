@@ -24,24 +24,32 @@ async function main() {
     let total: number = 0;
     const iter = function (supabaseLine: any) {
         total ++;
-        let addr = "";
+        let referral_address = "";
+        let user_address = "";
         try {
-            addr = convertAddress(supabaseLine.referral_address);
+            referral_address = convertAddress(supabaseLine.referral_address);
+            user_address = convertAddress(supabaseLine.user_address);
         } catch (err) { 
             badAccs.push({"reason": "bad_addr", "line": supabaseLine});
             return;
         }
-
+        // console.log(supabaseLine);
         const referralCreated: Date = new Date(supabaseLine.created_at);
         
-        if (!(addr in dict))  {
-            badAccs.push({"reason": `addr_not_found_postgres ${addr}`, "line": supabaseLine});
+        if (!(referral_address in dict))  {
+            // badAccs.push({"reason": `addr_not_found_postgres ${referral_address}`, "line": supabaseLine});
             return;
             // deleteByWalletAddress addr todo 
         }
-        const dateDiff = referralCreated.getTime() - dict[addr].getTime();
-        if (dateDiff / 1000 > 3600) {
-            badAccs.push({"reason": `deploy date, postgres: ${dict[addr]}`, "line": supabaseLine});
+        if (!(user_address in dict))  {
+            
+            // badAccs.push({"reason": `addr_not_found_postgres ${user_address}`, "line": supabaseLine});
+            return;
+            // deleteByWalletAddress addr todo 
+        }
+        const dateDiff = referralCreated.getTime() - dict[user_address].getTime();
+        if (dateDiff / 1000 > 3600) {  // 1000 
+            badAccs.push({"reason": `deploy date, postgres: ${dict[user_address].toUTCString()}`, "line": supabaseLine});
             // deleteByWalletAddress addr todo
         }
     };
