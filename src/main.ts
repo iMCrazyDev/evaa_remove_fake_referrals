@@ -39,7 +39,8 @@ async function main() {
             return;
             // deleteByWalletAddress addr todo 
         }
-        if (referralCreated > dict[addr]) {
+        const dateDiff = referralCreated.getTime() - dict[addr].getTime();
+        if (dateDiff / 1000 > 3600) {
             badAccs.push({"reason": `deploy date, postgres: ${dict[addr]}`, "line": supabaseLine});
             // deleteByWalletAddress addr todo
         }
